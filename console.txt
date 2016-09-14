@@ -1,0 +1,2 @@
+python-admin startapp ssp
+python manage.py startapp fronts
