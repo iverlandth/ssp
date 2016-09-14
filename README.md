@@ -2,10 +2,11 @@
 Sistema de seguimiento de Personal
 
 
-Create virtual env
+Create virtual env & activate
 
 1.- virtualenv venv
-2.- pip install -r requirements.txt
+2.- source /venv/bin/activate
+3.- pip install -r requirements.txt
 
 Migrate DB & superuser
 
