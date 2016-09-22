@@ -1,0 +1,38 @@
+{% extends 'layout/base.html' %}
+{% block submit %}
+    Guardar
+{% endblock %}
+{% block title %}
+    Editar
+{% endblock %}
+{% block link_back %}
+    {% url 'profiles-index' %}
+{% endblock %}
+{% block panel_title %}
+    Editar
+{% endblock %}
+{% block panel_title_right %}
+{% endblock %}
+{% block layout %}
+    <form action="" method="post">
+        <div class="form-group">
+            {% csrf_token %}
+            {{ form.as_p }}
+        </div>
+        <input type="submit" value="Guardar" class="btn btn-primary">
+
+    </form>
+{% endblock %}
+{% block code_js %}
+    <script>
+        $(document).ready(function () {
+            $('#id_date_of_birth').datepicker({dateFormat: 'dd/mm/yy'});
+            $('input:checkbox').addClass('js-switch');
+
+            var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+            $('.js-switch').each(function () {
+                new Switchery($(this)[0], $(this).data());
+            });
+        });
+    </script>
+{% endblock %}

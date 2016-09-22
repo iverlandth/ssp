@@ -1,2 +1,3 @@
 python-admin startapp ssp
 python manage.py startapp fronts
+python manage.py startapp users

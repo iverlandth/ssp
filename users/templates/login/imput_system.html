@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% extends 'layout/front.html' %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block content_main %}
+<br>
+<br>
+<br>
+    <!--Form with header-->
+    <div class="row">
+        <div class="col-lg-6 col-md-8 col-lg-offset-3 col-md-offset-2">
+            <div class="card">
+                <div class="card-block">
+                    <form id="formulario" method="post" action="">{% csrf_token %}
+                        <!--Header-->
+                        <div class="form-header  purple darken-4">
+                            <h3><i class="fa fa-lock"></i> Ingreso al sistema</h3>
+                        </div>
+                        {{ form.as_p }}
+                        <!--Body-->
+
+                        <div class="text-xs-center">
+                            <input type="submit" value="Ingresar" class="btn btn-default btn-deep-purple">
+                        </div>
+                    </form>
+
+                </div>
+
+                <!--Footer-->
+                <div class="modal-footer">
+                    <div class="options">
+                        <p>Not a member? <a href="#">Sign Up</a></p>
+                        <p>Forgot <a href="#">Password?</a></p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--/Form with header-->
+{% endblock %}
+{% block footer %}
+{% endblock %}

@@ -21,5 +21,6 @@ from fronts.views import index
 urlpatterns = [
     url(r'^$', index, name='home'),
     url(r'^fronts/', include('fronts.urls')),
+    url(r'^users/', include('users.urls')),
     url(r'^admin/', admin.site.urls),
 ]
