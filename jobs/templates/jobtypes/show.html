@@ -1,0 +1,25 @@
+{% extends 'layout/base.html' %}
+{% load utils %}
+
+{% block layout %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="white-box">
+                <a class="" href="{% url 'jobtypes-index' %}">
+                    Atras
+                </a>
+                <p>
+                    <strong>{% get_verbose_field_name jobtype_instance 'name' %}</strong>
+
+                    {{ jobtype.name }}
+
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block custom_js %}
+
+{% endblock %}

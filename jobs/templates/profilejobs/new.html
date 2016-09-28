@@ -1,0 +1,20 @@
+{% extends 'layout/base.html' %}
+
+{% block panel_left %}
+    <a class="ui blue ribbon label" href="{% url 'profilejobs-index' %}">
+        Atras
+    </a>
+{% endblock %}
+
+{% block layout %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="white-box">
+                {% include 'partials/_partial_form_horizontal.html' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block code_js %}
+
+{% endblock %}

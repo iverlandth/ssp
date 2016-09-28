@@ -1,0 +1,27 @@
+{% extends 'layout/base.html' %}
+{% block submit %}
+    Guardar
+{% endblock %}
+{% block title %}
+    Modificar
+{% endblock %}
+{% block link_back %}
+    {% url 'jobs-index' %}
+{% endblock %}
+{% block panel_title %}
+    Modificar
+{% endblock %}
+{% block panel_title_right %}
+{% endblock %}
+{% block layout %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="white-box">
+                {% include 'partials/_partial_form_horizontal.html' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block code_js %}
+
+{% endblock %}

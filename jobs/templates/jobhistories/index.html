@@ -11,7 +11,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <a href="{% url 'profiles-new' %}"
+                                        <a href="{% url 'jobhistories-new' %}"
                                            class="fcbtn btn btn-outline btn-primary btn-1f"> Nuevo Perfil</a>
                                     </div>
                                 </div>
@@ -35,11 +35,11 @@
                             </thead>
 
                             <tbody>
-                            {% for profile in profiles %}
+                            {% for profile in jobhistories %}
                                 <tr>
                                     <td>{{ forloop.counter }}</td>
                                     <td>
-                                        {% if profile.user.is_active %}
+                                        {% if profile.is_connect %}
                                             <span class="fa fa-circle text-success m-r-10"></span>
                                         {% else %}
                                             <span class="fa fa-circle text-warning m-r-10"></span>
@@ -49,9 +49,9 @@
                                     </td>
                                     <td>{{ profile.ci }}</td>
                                     <td class="text-center">
-                                        <a href="{% url 'profiles-show' profile.id %}">Ver mas Detalles</a> |
-                                        <a href="{% url 'profiles-edit' profile.id %}">Editar</a> |
-                                        <a href="{% url 'profiles-delete' profile.id %}">Eliminar</a>
+                                        <a href="{% url 'jobhistories-show' profile.id %}">Ver mas Detalles</a> |
+                                        <a href="{% url 'jobhistories-edit' profile.id %}">Modificar</a> |
+                                        <a href="{% url 'jobhistories-delete' profile.id %}">Eliminar</a>
                                     </td>
                                 </tr>
                             {% endfor %}

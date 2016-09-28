@@ -134,12 +134,19 @@
             </li>
 
             <li><a href="#" class="waves-effect"><i data-icon="Q" class="linea-icon linea-basic fa-fw"></i>
-                <span class="hide-menu">Mapas <span class="fa arrow"></span><span
+                <span class="hide-menu">Tipo de Trabajos <span class="fa arrow"></span><span
                         class="label label-rouded label-danger pull-right">1</span></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href="">Mostrar Mapas</a></li>
-                    <li><a href="">Localizaciones</a></li>
-                    <li><a href="">Ubicaciones</a></li>
+                    <li><a href="{% url 'jobtypes-index' %}">Mostrar Todos</a></li>
+                    <li><a href="{% url 'jobtypes-new' %}">Agregar Tipo de Trabajos</a></li>
+                </ul>
+            </li>
+            <li><a href="#" class="waves-effect"><i data-icon="Q" class="linea-icon linea-basic fa-fw"></i>
+                <span class="hide-menu">Trabajos <span class="fa arrow"></span><span
+                        class="label label-rouded label-danger pull-right">1</span></span></a>
+                <ul class="nav nav-second-level">
+                    <li><a href="{% url 'jobs-index' %}">Mostrar Todos</a></li>
+                    <li><a href="{% url 'jobs-new' %}">Agregar Trabajo</a></li>
                 </ul>
             </li>
 

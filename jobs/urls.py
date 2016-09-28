@@ -5,10 +5,28 @@ from jobs import views
 
 urlpatterns = [
 
-    '''url(r'^profiles/index$', views.profiles_index, name='profiles-index'),
-    url(r'^profiles/new/$', views.profiles_new, name='profiles-new'),
-    url(r'^profiles/edit/(\d+)/$', views.profiles_edit, name='profiles-edit'),
-    url(r'^profiles/show/(\d+)/$', views.profiles_show, name='profiles-show'),
-    url(r'^profiles/delete/(\d+)/$', views.profiles_show, name='profiles-delete'),
-    '''
+    url(r'^jobhistories/index$', views.jobhistories_index, name='jobhistories-index'),
+    url(r'^jobhistories/new/(?P<pj_id>\d+)/$', views.jobhistories_new, name='jobhistories-new'),
+    url(r'^jobhistories/edit/(\d+)/$', views.jobhistories_edit, name='jobhistories-edit'),
+    url(r'^jobhistories/show/(\d+)/$', views.jobhistories_show, name='jobhistories-show'),
+    url(r'^jobhistories/delete/(\d+)/$', views.jobhistories_show, name='jobhistories-delete'),
+
+    url(r'^jobs/index$', views.jobs_index, name='jobs-index'),
+    url(r'^jobs/new/$', views.jobs_new, name='jobs-new'),
+    url(r'^jobs/edit/(\d+)/$', views.jobs_edit, name='jobs-edit'),
+    url(r'^jobs/show/(\d+)/$', views.jobs_show, name='jobs-show'),
+    url(r'^jobs/delete/(\d+)/$', views.jobs_show, name='jobs-delete'),
+
+    url(r'^jobtypes/index$', views.jobtypes_index, name='jobtypes-index'),
+    url(r'^jobtypes/new/$', views.jobtypes_new, name='jobtypes-new'),
+    url(r'^jobtypes/edit/(\d+)/$', views.jobtypes_edit, name='jobtypes-edit'),
+    url(r'^jobtypes/show/(\d+)/$', views.jobtypes_show, name='jobtypes-show'),
+    url(r'^jobtypes/delete/(\d+)/$', views.jobtypes_show, name='jobtypes-delete'),
+
+    url(r'^profilejobs/index$', views.profilejobs_index, name='profilejobs-index'),
+    url(r'^profilejobs/new/(?P<j_id>\d+)/$', views.profilejobs_new, name='profilejobs-new'),
+    url(r'^profilejobs/edit/(\d+)/$', views.profilejobs_edit, name='profilejobs-edit'),
+    url(r'^profilejobs/show/(\d+)/$', views.profilejobs_show, name='profilejobs-show'),
+    url(r'^profilejobs/delete/(\d+)/$', views.profilejobs_show, name='profilejobs-delete'),
+
 ]

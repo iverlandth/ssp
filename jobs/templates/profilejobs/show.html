@@ -1,0 +1,34 @@
+{% extends 'layout/base.html' %}
+{% load utils %}
+{% block layout %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="white-box">
+                <a href="{% url 'jobhistories-new' profilejob.id %}"
+                   class="fcbtn btn btn-outline btn-primary btn-1f">Registrar Trabajo</a>
+
+                <p>
+                    <strong>{% get_verbose_field_name profilejob_instance 'state' %}</strong>
+                    {{ profilejob.state }}
+                </p>
+                <p>
+                    <strong>{% get_verbose_field_name profilejob_instance 'profile' %}</strong>
+                    {{ profilejob.profile }}
+                </p>
+                <p>
+                    <strong>{% get_verbose_field_name profilejob_instance 'job' %}</strong>
+                    {{ profilejob.job }}
+                </p>
+                <p>
+                    <strong>{% get_verbose_field_name profilejob_instance 'assign_at' %}</strong>
+                    {{ profilejob.assign_at }}
+                </p>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block custom_js %}
+
+{% endblock %}

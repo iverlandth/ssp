@@ -1,19 +1,15 @@
 {% extends 'layout/base.html' %}
-
+{% load utils %}
 {% block layout %}
     <div class="row">
         <div class="col-md-12">
             <div class="white-box">
-                <h3>Usuarios</h3>
+                <h3>Asignaciones</h3>
                 <div class="panel panel-primary">
                     <div class="row">
                         <div class="form-inline padding-bottom-15">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <a href="{% url 'profiles-new' %}"
-                                           class="fcbtn btn btn-outline btn-primary btn-1f"> Nuevo Perfil</a>
-                                    </div>
                                 </div>
                                 <div class="col-sm-6 text-right m-b-20">
                                     <div class="form-group">
@@ -28,30 +24,26 @@
                             <thead class="table-bordered ">
                             <tr>
                                 <th>#</th>
-                                <th>Nombres y Apellidos</th>
-                                <th>Ci</th>
+                                <th>{% get_verbose_field_name profilejob_instance 'state' %}</th>
+                                <th>{% get_verbose_field_name profilejob_instance 'profile' %}</th>
+                                <th>{% get_verbose_field_name profilejob_instance 'job' %}</th>
                                 <th class="text-center">Opciones</th>
                             </tr>
                             </thead>
 
                             <tbody>
-                            {% for profile in profiles %}
+                            {% for profile in profilejobs %}
                                 <tr>
                                     <td>{{ forloop.counter }}</td>
                                     <td>
-                                        {% if profile.user.is_active %}
-                                            <span class="fa fa-circle text-success m-r-10"></span>
-                                        {% else %}
-                                            <span class="fa fa-circle text-warning m-r-10"></span>
-                                        {% endif %}
-                                        {{ profile.first_name }}
-                                        {{ profile.middle_name }}
+                                        {{ profile.state }}
                                     </td>
-                                    <td>{{ profile.ci }}</td>
+                                    <td>{{ profile.profile }}</td>
+                                    <td>{{ profile.job }}</td>
                                     <td class="text-center">
-                                        <a href="{% url 'profiles-show' profile.id %}">Ver mas Detalles</a> |
-                                        <a href="{% url 'profiles-edit' profile.id %}">Editar</a> |
-                                        <a href="{% url 'profiles-delete' profile.id %}">Eliminar</a>
+                                        <a href="{% url 'profilejobs-show' profile.id %}">Ver mas Detalles</a> |
+                                        <a href="{% url 'profilejobs-edit' profile.id %}">Modificar</a> |
+                                        <a href="{% url 'profilejobs-delete' profile.id %}">Eliminar</a>
                                     </td>
                                 </tr>
                             {% endfor %}

@@ -1,0 +1,18 @@
+{% extends 'layout/base.html' %}
+
+{% block layout %}
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="white-box">
+                <a class="" href="{% url 'jobtypes-index' %}">
+                    Atrás
+                </a>
+                {% include 'partials/_partial_form_horizontal.html' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block code_js %}
+
+{% endblock %}
