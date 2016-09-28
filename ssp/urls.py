@@ -22,5 +22,7 @@ urlpatterns = [
     url(r'^$', index, name='home'),
     url(r'^fronts/', include('fronts.urls')),
     url(r'^users/', include('users.urls')),
+    url(r'^jobs/', include('jobs.urls')),
+    url(r'^notifications/', include('notifications.urls')),
     url(r'^admin/', admin.site.urls),
 ]
