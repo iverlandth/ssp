@@ -34,9 +34,9 @@ class Job(models.Model):
     address = models.CharField(max_length=100, verbose_name=u'Dirección')
     description = models.TextField(verbose_name=u'Descripción')
     mobile_phone = models.CharField(max_length=20, verbose_name=u'Número de Celular')
-    register_at = models.DateField(blank=True, null=True, verbose_name='Fecha de registro')
-    lat = models.IntegerField(blank=True, null=True, verbose_name='Latitud')
-    lng = models.IntegerField(blank=True, null=True, verbose_name='Longitud')
+    register_at = models.DateField(default=datetime.now, verbose_name='Fecha de registro')
+    lat = models.CharField(max_length=50, blank=True, verbose_name='Latitud')
+    lng = models.CharField(max_length=50, blank=True, verbose_name='Longitud')
 
     def __unicode__(self):
         return "%s %s" % (self.name_client, self.jobtype)
@@ -79,8 +79,8 @@ class JobHistory(models.Model):
     observation = models.TextField(verbose_name=u'Observación')
     register_at = models.DateTimeField(default=datetime.now, verbose_name='Fecha de Registro')
 
-    lat = models.IntegerField(blank=True, null=True, verbose_name='Latitud')
-    lng = models.IntegerField(blank=True, null=True, verbose_name='Longitud')
+    lat = models.CharField(max_length=50, blank=True, verbose_name='Latitud')
+    lng = models.CharField(max_length=50, blank=True, verbose_name='Longitud')
 
     def __unicode__(self):
         return "%s" % (self.profilejob)

@@ -21,7 +21,7 @@ class JobTypeForm(BaseForm):
 class JobForm(BaseForm):
     class Meta:
         model = Job
-        fields = '__all__'
+        exclude = ['register_at']
 
 
 class ProfileJobForm(BaseForm):

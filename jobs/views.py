@@ -196,7 +196,8 @@ def jobs_edit(request, id):
     else:
         job_form = JobForm(instance=job)
     return render(request, 'jobs/edit.html', {
-        'form': job_form
+        'form': job_form,
+        'job': job
     })
 
 
