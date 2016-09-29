@@ -33,6 +33,16 @@ class ProfileJobForm(BaseForm):
         model = ProfileJob
         exclude = ['assign_at']
 
+    def clean(self):
+        cleaned_data = super(ProfileJobForm, self).clean()
+        job = cleaned_data.get("job")
+        profile = cleaned_data.get("profile")
+
+        if ProfileJob.objects.filter(profile=profile, state='N').count() > 5:
+            msg = "No se pueden asignar mas trabajos."
+            self.add_error('job', msg)
+            self.add_error('profile', msg)
+
 
 class JobHistoryForm(BaseForm):
     class Meta:
