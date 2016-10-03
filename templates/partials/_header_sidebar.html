@@ -1,15 +1,18 @@
 <nav class="navbar navbar-default navbar-static-top m-b-0">
     <div class="navbar-header"><a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)"
                                   data-toggle="collapse" data-target=".navbar-collapse"><i class="ti-menu"></i></a>
-        <div class="top-left-part"><a class="logo" href="/"><b><img
-                src="/static/eliteadmin/plugins/images/eliteadmin-logo.png" alt="home"/></b><span class="hidden-xs"><img
-                src="/static/eliteadmin/plugins/images/eliteadmin-text.png" alt="home"/></span></a></div>
+        <div class="top-left-part"><a class="logo" href="/">
+            <br><div class="text-center">
+                  SSP
+            </div>
+        </a>
+        </div>
         <ul class="nav navbar-top-links navbar-left hidden-xs">
             <li><a href="javascript:void(0)" class="open-close hidden-xs waves-effect waves-light"><i
                     class="icon-arrow-left-circle ti-menu"></i></a></li>
             <li>
                 <form role="search" class="app-search hidden-xs">
-                    <input type="text" placeholder="Search..." class="form-control">
+                    <input type="text" placeholder="Buscar..." class="form-control">
                     <a href=""><i class="fa fa-search"></i></a>
                 </form>
             </li>
@@ -21,7 +24,7 @@
             </a>
                 <ul class="dropdown-menu mailbox animated bounceInDown">
                     <li>
-                        <div class="drop-title">Ultimos Historiales</div>
+                        <div class="drop-title">Notificacioness</div>
                     </li>
                     <li>
                         <div class="message-center"><a href="#">
@@ -72,13 +75,11 @@
             <li class="dropdown"><a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <img
                     src="/static/eliteadmin/plugins/images/users/varun.jpg" alt="user-img" width="36"
                     class="img-circle"><b
-                    class="hidden-xs">Steave</b> </a>
+                    class="hidden-xs">{{ user.username }}</b> </a>
                 <ul class="dropdown-menu dropdown-user animated flipInY">
-                    <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
-                    <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
-                    <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
+                    <li><a href="{%  url 'profiles-user-show' user.id %}"><i class="ti-user"></i> Mi perfil</a></li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
+                    <li><a href="#"><i class="ti-settings"></i> Configuraciones</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="{% url 'log_out' %}"><i class="fa fa-power-off"></i> Salir</a></li>
                 </ul>
@@ -109,19 +110,8 @@
             </span></div>
                 <!-- /input-group -->
             </li>
-            <li class="user-pro"><a href="#" class="waves-effect"><img
-                    src="/static/eliteadmin/plugins/images/users/varun.jpg"
-                    alt="user-img" class="img-circle"> <span
-                    class="hide-menu"> Steve Gection<span class="fa arrow"></span></span></a>
-                <ul class="nav nav-second-level">
-                    <li><a href="javascript:void(0)"><i class="ti-user"></i> My Profile</a></li>
-                    <li><a href="javascript:void(0)"><i class="ti-wallet"></i> My Balance</a></li>
-                    <li><a href="javascript:void(0)"><i class="ti-email"></i> Inbox</a></li>
-                    <li><a href="javascript:void(0)"><i class="ti-settings"></i> Account Setting</a></li>
-                    <li><a href="{% url 'log_out' %}"><i class="fa fa-power-off"></i> Salir</a></li>
-                </ul>
-            </li>
-            <li class="nav-small-cap m-t-10">--- Main Menu</li>
+
+            <li class="nav-small-cap m-t-10">--- Menu</li>
             <li><a href="index.html" class="waves-effect"><i class="linea-icon linea-basic fa-fw" data-icon="v"></i>
                 <span class="hide-menu"> Dashboard <span class="fa arrow"></span> <span
                         class="label label-rouded label-custom pull-right">4</span></span></a>
@@ -133,7 +123,7 @@
                 </ul>
             </li>
 
-            <li><a href="#" class="waves-effect"><i data-icon="Q" class="linea-icon linea-basic fa-fw"></i>
+            <li><a href="#" class="waves-effect"><i class="fa fa-cubes"></i>
                 <span class="hide-menu">Tipo de Trabajos <span class="fa arrow"></span><span
                         class="label label-rouded label-danger pull-right">1</span></span></a>
                 <ul class="nav nav-second-level">
@@ -141,7 +131,7 @@
                     <li><a href="{% url 'jobtypes-new' %}">Agregar Tipo de Trabajos</a></li>
                 </ul>
             </li>
-            <li><a href="#" class="waves-effect"><i data-icon="Q" class="linea-icon linea-basic fa-fw"></i>
+            <li><a href="#" class="waves-effect"><i class="fa fa-object-group"></i>
                 <span class="hide-menu">Trabajos <span class="fa arrow"></span><span
                         class="label label-rouded label-danger pull-right">1</span></span></a>
                 <ul class="nav nav-second-level">
@@ -150,7 +140,7 @@
                 </ul>
             </li>
 
-            <li><a href="#" class="waves-effect"><i data-icon="/" class="linea-icon linea-basic fa-fw"></i> <span
+            <li><a href="#" class="waves-effect"><i class="fa fa-users"></i> <span
                     class="hide-menu">Usuarios<span class="fa arrow"></span> <span
                     class="label label-rouded label-info pull-right">2</span> </span></a>
                 <ul class="nav nav-second-level">
@@ -160,7 +150,7 @@
                 </ul>
             </li>
 
-            <li><a href="#" class="waves-effect"><i data-icon="/" class="linea-icon linea-basic fa-fw"></i> <span
+            <li><a href="#" class="waves-effect"><i class="fa fa-envelope-o"></i> <span
                     class="hide-menu">Notificaciones<span class="fa arrow"></span> <span
                     class="label label-rouded label-info pull-right">1</span> </span></a>
                 <ul class="nav nav-second-level">

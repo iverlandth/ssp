@@ -76,6 +76,19 @@ def profiles_show(request, id):
         'user_instance': User,
     })
 
+def profiles_user_show(request, u_id):
+    if not Profile.objects.filter(user_id=u_id).exists():
+        message = "No existe perfil para este usuario"
+        messages.add_message(request, messages.INFO, message)
+        return HttpResponseRedirect(reverse(profiles_index))
+    profile = Profile.objects.get(user_id=u_id)
+
+    return render(request, 'profiles/show.html', {
+        'profile': profile,
+        'profile_instance': Profile,
+        'user_instance': User,
+    })
+
 
 def profiles_delete(request, id):
     profile = Profile.objects.get(id=id)
