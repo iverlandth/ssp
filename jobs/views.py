@@ -10,9 +10,17 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 # Create your views here.
-
+from jobs.api import JobSerializer
 from jobs.models import JobType, Job, ProfileJob, JobHistory
 from jobs.form import JobTypeForm, JobForm, ProfileJobForm, JobHistoryForm
+from users.models import Profile
+
+from rest_framework import generics
+from rest_framework import status
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.renderers import JSONRenderer
 
 
 def jobtypes_index(request):
@@ -106,7 +114,7 @@ def jobhistories_new(request, pj_id):
             message = 'Existen errores por favor verifica!.'
             messages.add_message(request, messages.ERROR, message)
     else:
-        pj= ProfileJob.objects.get(pk=int(pj_id))
+        pj = ProfileJob.objects.get(pk=int(pj_id))
         form = JobHistoryForm(initial={'profilejob': pj})
     return render(request, 'jobhistories/new.html', {
         'form': form,
@@ -153,6 +161,71 @@ def jobhistories_delete(request, id):
         messages.add_message(request, messages.SUCCESS, message)
 
     return HttpResponseRedirect(reverse(jobhistories_index))
+
+
+# FORMAT API
+'''
+{
+	"job_id": 1,
+	"imei_code": "123456789",
+	"state": "P",
+	"observation": "Esto es una observacion",
+	"lat": "-12.312123",
+	"lng": "12.123123123"
+}
+'''
+
+
+class HistoryViewSet(APIView):
+    def get(self, request, format=None):
+        queryset = Job.objects.all()
+        serializer_class = JobSerializer(queryset, many=True)
+        return Response(serializer_class.data)
+
+    renderer_classes = (JSONRenderer,)
+
+    def post(self, request, format=None):
+        print request.data
+
+        if request.data.has_key('job_id') is not None and request.data.has_key('imei_code') is not None:
+            job_id = request.data['job_id']
+            imei = request.data['imei_code']
+
+            state = request.data['state'] if request.data.has_key('state') else None
+            observation = request.data['observation'] if request.data.has_key('observation') else None
+            lat = request.data['lat'] if request.data.has_key('lat') else None
+            lng = request.data['lng'] if request.data.has_key('lng') else None
+
+            if Profile.objects.filter(imei_code=imei).exists() and Job.objects.filter(pk=job_id).exists():
+                profile = Profile.objects.get(imei_code=imei)
+                job = Job.objects.get(pk=job_id)
+                pj = ProfileJob.objects.get(profile=profile, job=job_id)
+                pj.state = state
+                pj.save(update_fields=['state'])
+
+                jh = JobHistory(observation=observation,
+                                lat=lat,
+                                lng=lng,
+                                profile_id=profile.id,
+                                profilejob_id=pj.id)
+                jh.save()
+
+                response_json = {'imei_code': imei,
+                                 'state': state,
+                                 'lat': lat,
+                                 'lng': lng,
+                                 'observation': observation,
+                                 'job_id': job.id,
+                                 'profile_id': profile.id}
+
+                return Response(response_json, status=status.HTTP_201_CREATED)
+            else:
+                message = {'message': 'No Existe perfil o Tarea'}
+                return Response(message, status=status.HTTP_400_BAD_REQUEST)
+
+        else:
+            message = {'message': 'No Existe Imei o Tarea'}
+            return Response(message, status=status.HTTP_400_BAD_REQUEST)
 
 
 # JOBS

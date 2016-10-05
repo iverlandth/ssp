@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^jobhistories/show/(\d+)/$', views.jobhistories_show, name='jobhistories-show'),
     url(r'^jobhistories/delete/(\d+)/$', views.jobhistories_show, name='jobhistories-delete'),
 
+    url(r'^api/v1/jobhistories/$', views.HistoryViewSet.as_view(), name='gmap_list'),
     url(r'^jobs/index$', views.jobs_index, name='jobs-index'),
     url(r'^jobs/new/$', views.jobs_new, name='jobs-new'),
     url(r'^jobs/edit/(\d+)/$', views.jobs_edit, name='jobs-edit'),
