@@ -346,10 +346,13 @@ def profilejobs_edit(request, id):
 
 def profilejobs_show(request, id):
     profilejob = ProfileJob.objects.get(id=id)
+    jobhistories = JobHistory.objects.filter(profilejob=profilejob)
 
     return render(request, 'profilejobs/show.html', {
         'profilejob': profilejob,
         'profilejob_instance': ProfileJob,
+        'jobhistories': jobhistories,
+        'jobhistory_instance': JobHistory,
     })
 
 
