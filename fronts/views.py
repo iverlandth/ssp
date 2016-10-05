@@ -7,3 +7,8 @@ def index(request):
         template = 'home/dashboard.html'
 
     return render(request, template, {})
+
+
+def api_view(request):
+    template = 'home/documentation.html'
+    return render(request, template, {})
