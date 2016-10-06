@@ -163,6 +163,23 @@ def jobhistories_delete(request, id):
     return HttpResponseRedirect(reverse(jobhistories_index))
 
 
+class JobViewSet(APIView):
+    def get(self, request, imei, format=None):
+
+        if imei is not None and Profile.objects.filter(imei_code=imei).exists():
+
+            profile = Profile.objects.get(imei_code=imei)
+
+            jobs = Job.objects.filter(profilejob__profile=profile, profilejob__state__in=['N','P'])
+
+            queryset = Job.objects.all()
+            serializer_class = JobSerializer(jobs, many=True)
+            return Response(serializer_class.data)
+        else:
+            message = {'message': 'Imei no registrado'}
+            return Response(message, status=status.HTTP_400_BAD_REQUEST)
+
+
 # FORMAT API
 '''
 {
@@ -177,11 +194,6 @@ def jobhistories_delete(request, id):
 
 
 class HistoryViewSet(APIView):
-    def get(self, request, format=None):
-        queryset = Job.objects.all()
-        serializer_class = JobSerializer(queryset, many=True)
-        return Response(serializer_class.data)
-
     renderer_classes = (JSONRenderer,)
 
     def post(self, request, format=None):
