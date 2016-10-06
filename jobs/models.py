@@ -6,10 +6,10 @@ from django.contrib.auth.models import User
 # Create your models here.
 from users.models import Profile
 
-STATUS_TASK = (('N', 'NUEVO'),
-               ('P', 'EN PROCESO'),
-               ('T', 'TERMINADO'),
-               ('D', 'DETENIDO'),)
+STATUS_TASK = (('NUEVO', 'NUEVO'),
+               ('EN_PROCESO', 'EN PROCESO'),
+               ('TERMINADO', 'TERMINADO'),
+               ('DETENIDO', 'DETENIDO'),)
 
 
 class JobType(models.Model):
@@ -34,9 +34,10 @@ class Job(models.Model):
     address = models.CharField(max_length=100, verbose_name=u'Dirección')
     description = models.TextField(verbose_name=u'Descripción')
     mobile_phone = models.CharField(max_length=20, verbose_name=u'Número de Celular')
-    register_at = models.DateTimeField(default=datetime.now, verbose_name='Fecha de registro')
+    state = models.CharField(max_length=10, choices=STATUS_TASK, verbose_name='Estado', default='NUEVO')
     lat = models.CharField(max_length=50, blank=True, verbose_name='Latitud')
     lng = models.CharField(max_length=50, blank=True, verbose_name='Longitud')
+    register_at = models.DateTimeField(default=datetime.now, verbose_name='Fecha de registro')
 
     def __unicode__(self):
         return "%s %s" % (self.name_client, self.jobtype)
@@ -55,7 +56,7 @@ class Job(models.Model):
 class ProfileJob(models.Model):
     job = models.ForeignKey(Job)
     profile = models.ForeignKey(Profile)
-    state = models.CharField(max_length=100, choices=STATUS_TASK, verbose_name='Estado', default='N')
+    state = models.CharField(max_length=10, choices=STATUS_TASK, verbose_name='Estado', default='NUEVO')
     assign_at = models.DateTimeField(default=datetime.now, verbose_name=u'Fecha de Asignación')
 
 

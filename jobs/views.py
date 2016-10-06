@@ -170,11 +170,11 @@ class JobViewSet(APIView):
 
             profile = Profile.objects.get(imei_code=imei)
 
-            jobs = Job.objects.filter(profilejob__profile=profile, profilejob__state__in=['N','P'])
+            jobs = Job.objects.filter(profilejob__profile=profile, state__in=['NUEVO', 'EN_PROCESO'])
 
-            queryset = Job.objects.all()
             serializer_class = JobSerializer(jobs, many=True)
-            return Response(serializer_class.data)
+
+            return Response({'jobs': serializer_class.data})
         else:
             message = {'message': 'Imei no registrado'}
             return Response(message, status=status.HTTP_400_BAD_REQUEST)
@@ -197,47 +197,59 @@ class HistoryViewSet(APIView):
     renderer_classes = (JSONRenderer,)
 
     def post(self, request, format=None):
-        print request.data
-
-        if request.data.has_key('job_id') is not None and request.data.has_key('imei_code') is not None:
-            job_id = request.data['job_id']
-            imei = request.data['imei_code']
-
-            state = request.data['state'] if request.data.has_key('state') else None
-            observation = request.data['observation'] if request.data.has_key('observation') else None
-            lat = request.data['lat'] if request.data.has_key('lat') else None
-            lng = request.data['lng'] if request.data.has_key('lng') else None
-
-            if Profile.objects.filter(imei_code=imei).exists() and Job.objects.filter(pk=job_id).exists():
-                profile = Profile.objects.get(imei_code=imei)
-                job = Job.objects.get(pk=job_id)
-                pj = ProfileJob.objects.get(profile=profile, job=job_id)
-                pj.state = state
-                pj.save(update_fields=['state'])
-
-                jh = JobHistory(observation=observation,
-                                lat=lat,
-                                lng=lng,
-                                profile_id=profile.id,
-                                profilejob_id=pj.id)
-                jh.save()
-
-                response_json = {'imei_code': imei,
-                                 'state': state,
-                                 'lat': lat,
-                                 'lng': lng,
-                                 'observation': observation,
-                                 'job_id': job.id,
-                                 'profile_id': profile.id}
-
-                return Response(response_json, status=status.HTTP_201_CREATED)
-            else:
-                message = {'message': 'No Existe perfil o Tarea'}
-                return Response(message, status=status.HTTP_400_BAD_REQUEST)
-
-        else:
-            message = {'message': 'No Existe Imei o Tarea'}
+        #print request.data
+        updates = []
+        if request.data.has_key('updates') is None:
+            message = {'message': 'No Existen Actualizaciones'}
             return Response(message, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            updates = request.data['updates']
+            response_json = []
+
+            for history in updates:
+                print history['imei_code']
+                job_id = history['job_id']
+                imei = history['imei_code']
+                imei = '123456789'
+
+                state = history['h_state'] if history.has_key('h_state') else None
+                observation = history['h_observation'] if history.has_key('h_observation') else None
+                lat = history['h_lat'] if history.has_key('h_lat') else None
+                lng = history['h_lng'] if history.has_key('h_lng') else None
+
+                if Profile.objects.filter(imei_code=imei).exists() and Job.objects.filter(pk=job_id).exists():
+
+                    profile = Profile.objects.get(imei_code=imei)
+
+                    job = Job.objects.get(pk=job_id)
+                    job.state = state
+                    job.save(update_fields=['state'])
+
+                    pj = ProfileJob.objects.get(profile=profile, job=job_id)
+                    pj.state = state
+                    pj.save(update_fields=['state'])
+
+                    jh = JobHistory(observation=observation,
+                                    lat=lat,
+                                    lng=lng,
+                                    profile_id=profile.id,
+                                    profilejob_id=pj.id)
+                    jh.save()
+
+                    build_json = {'imei_code': imei,
+                                  'state': state,
+                                  'lat': lat,
+                                  'lng': lng,
+                                  'observation': observation,
+                                  'job_id': job.id,
+                                  'profile_id': profile.id}
+
+                    response_json.append(build_json)
+
+            return Response({"updates": response_json}, status=status.HTTP_201_CREATED)
+
+            # message = {'message': 'No Existe perfil o Tarea'}
+            # return Response(message, status=status.HTTP_400_BAD_REQUEST)
 
 
 # JOBS
