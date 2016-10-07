@@ -1,25 +1,11 @@
-{% extends 'layout/base.html' %}
+{% extends 'layout/admin_base.html' %}
 
-{% block title %}
-    Modificar
-{% endblock %}
-
-{% block panel_title %}
-    Modificar
-{% endblock %}
-{% block panel_title_right %}
+{% block title_layout %}
+    <h3><a href="{% url 'jobtypes-index' %}" data-tooltip="tooltip" title="Atrás"><i
+            class="fa fa-arrow-circle-left"></i></a> Modificando Tipo de Trabajo</h3>
 {% endblock %}
 {% block layout %}
-    <div class="row">
-        <div class="col-md-12">
-            <div class="white-box">
-                <a class="ui blue ribbon label" href="{% url 'jobtypes-index' %}">
-                    Atrás
-                </a>
-                {% include 'partials/_partial_form_horizontal.html' %}
-            </div>
-        </div>
-    </div>
+    {% include 'partials/_partial_form_horizontal.html' %}
 {% endblock %}
 {% block submit %}
     Guardar

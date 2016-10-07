@@ -1,17 +1,11 @@
-{% extends 'layout/base.html' %}
+{% extends 'layout/admin_base.html' %}
+{% block title_layout %}
+    <h3><a href="{% url 'jobtypes-index' %}" data-tooltip="tooltip" title="Atrás"><i
+            class="fa fa-arrow-circle-left"></i></a> Agregando Tipo de Trabajo</h3>
+{% endblock %}
 
 {% block layout %}
-    <div class="row">
-        <div class="col-md-12">
-
-            <div class="white-box">
-                <a class="" href="{% url 'jobtypes-index' %}">
-                    Atrás
-                </a>
-                {% include 'partials/_partial_form_horizontal.html' %}
-            </div>
-        </div>
-    </div>
+    {% include 'partials/_partial_form_horizontal.html' %}
 {% endblock %}
 {% block code_js %}
 
