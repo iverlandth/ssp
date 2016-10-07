@@ -37,3 +37,7 @@ class Profile(models.Model):
         verbose_name = 'Perfil'
         verbose_name_plural = 'Perfiles'
 
+        permissions = (
+            ('show_profile', 'Can Details Profile'),
+            ('index_profile', 'Can List Profile'),
+        )

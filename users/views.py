@@ -1,13 +1,12 @@
 # encoding:utf-8
 from django.utils import timezone
-
 from users.models import Profile
 from django.shortcuts import render
 from users.form import ProfileForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User, Group
 from django.contrib import messages
 from django.core.urlresolvers import reverse
@@ -18,7 +17,7 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 
-@login_required(login_url='/log_in')
+@permission_required('users.index_profile', login_url='/login')
 def profiles_index(request):
     profiles_all = Profile.objects.all()
     return render(request, 'profiles/index.html', {
@@ -26,7 +25,7 @@ def profiles_index(request):
         'profile_obj': Profile,
     })
 
-@login_required(login_url='/log_in')
+@permission_required('users.add_profile', login_url='/login')
 def profiles_new(request):
     if request.method == 'POST':
         formUser = UserCreationForm(request.POST)
@@ -50,7 +49,7 @@ def profiles_new(request):
         'form_second': formUser,
     })
 
-@login_required(login_url='/log_in')
+@permission_required('users.change_profile', login_url='/login')
 def profiles_edit(request, id):
     profile = Profile.objects.get(id=id)
     if request.method == 'POST':
@@ -67,17 +66,17 @@ def profiles_edit(request, id):
         'form': profile_form
     })
 
-@login_required(login_url='/log_in')
+@permission_required('users.delete_profile', login_url='/login')
 def profiles_show(request, id):
     profile = Profile.objects.get(id=id)
 
     return render(request, 'profiles/show.html', {
         'profile': profile,
         'profile_obj': Profile,
-        'user_instance': User,
+        'user_obj': User,
     })
 
-@login_required(login_url='/log_in')
+@permission_required('users.show_profile', login_url='/login')
 def profiles_user_show(request, u_id):
     if not Profile.objects.filter(user_id=u_id).exists():
         message = "No existe perfil para este usuario"
@@ -91,7 +90,7 @@ def profiles_user_show(request, u_id):
         'user_instance': User,
     })
 
-@login_required(login_url='/log_in')
+@permission_required('users.delete_profile', login_url='/login')
 def profiles_delete(request, id):
     profile = Profile.objects.get(id=id)
     profile.delete()

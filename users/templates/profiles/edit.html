@@ -1,27 +1,12 @@
-{% extends 'layout/base.html' %}
-{% block submit %}
-    Guardar
-{% endblock %}
-{% block title %}
-    Editar
-{% endblock %}
-{% block link_back %}
-    {% url 'profiles-index' %}
-{% endblock %}
-{% block panel_title %}
-    Editar
-{% endblock %}
-{% block panel_title_right %}
-{% endblock %}
-{% block layout %}
-    <form action="" method="post">
-        <div class="form-group">
-            {% csrf_token %}
-            {{ form.as_p }}
-        </div>
-        <input type="submit" value="Guardar" class="btn btn-primary">
+{% extends 'layout/admin_base.html' %}
 
-    </form>
+{% block title_layout %}
+    <h3><a href="{% url 'profiles-index' %}" data-tooltip="tooltip" title="Atrás"><i
+            class="fa fa-arrow-circle-left"></i></a> Modificando Perfil</h3>
+{% endblock %}
+
+{% block layout %}
+    {% include 'partials/_partial_form_horizontal.html' %}
 {% endblock %}
 {% block code_js %}
     <script>

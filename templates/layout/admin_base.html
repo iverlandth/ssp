@@ -1,9 +1,4 @@
-{% extends 'layout/layout.html' %}
-
-{% block title %}
-    Geolocalización
-{% endblock %}
-
+{% extends 'layout/admin.html' %}
 
 {% block css %}
     {% load staticfiles %}
@@ -60,7 +55,7 @@
 {% endblock %}
 
 
-{% block js %}
+{% block url_js %}
     {% load staticfiles %}
 
     <!-- jQuery -->
@@ -178,38 +173,5 @@
 
 {% endblock %}
 
-{% block body_class %}
-    class="fix-sidebar"
-{% endblock %}
-{% block header %}
-    {% include 'partials/_header_sidebar.html' %}
-{% endblock %}
 
 
-
-{% block content_main %}
-    <!--<div class="preloader">
-        <div class="cssload-speeding-wheel"></div>
-    </div>
-    -->
-    <div id="page-wrapper" style="padding-top: 15px">
-        <div class="container-fluid">
-            {% include 'layout/_messages.html' %}
-            {% block layout %}
-            {% endblock %}
-        </div>
-    </div>
-{% endblock %}
-
-{% block code_global_js %}
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('input').addClass('form-control');
-            $('input:checkbox, input:radio').removeClass('form-control');
-            $('[data-tooltip="tooltip"]').tooltip();
-            $('#confirm-delete').on('show.bs.modal', function (e) {
-                $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-            });
-        })
-    </script>
-{% endblock %}
