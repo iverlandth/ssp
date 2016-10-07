@@ -18,7 +18,7 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 
-
+@login_required(login_url='/log_in')
 def profiles_index(request):
     profiles_all = Profile.objects.all()
     return render(request, 'profiles/index.html', {
@@ -26,7 +26,7 @@ def profiles_index(request):
         'profile_obj': Profile,
     })
 
-
+@login_required(login_url='/log_in')
 def profiles_new(request):
     if request.method == 'POST':
         formUser = UserCreationForm(request.POST)
@@ -50,7 +50,7 @@ def profiles_new(request):
         'form_second': formUser,
     })
 
-
+@login_required(login_url='/log_in')
 def profiles_edit(request, id):
     profile = Profile.objects.get(id=id)
     if request.method == 'POST':
@@ -67,7 +67,7 @@ def profiles_edit(request, id):
         'form': profile_form
     })
 
-
+@login_required(login_url='/log_in')
 def profiles_show(request, id):
     profile = Profile.objects.get(id=id)
 
@@ -77,6 +77,7 @@ def profiles_show(request, id):
         'user_instance': User,
     })
 
+@login_required(login_url='/log_in')
 def profiles_user_show(request, u_id):
     if not Profile.objects.filter(user_id=u_id).exists():
         message = "No existe perfil para este usuario"
@@ -90,7 +91,7 @@ def profiles_user_show(request, u_id):
         'user_instance': User,
     })
 
-
+@login_required(login_url='/log_in')
 def profiles_delete(request, id):
     profile = Profile.objects.get(id=id)
     profile.delete()
@@ -123,23 +124,17 @@ def log_in(request):
                     else:
                         return HttpResponseRedirect('/')
                 else:
-                    return render(request, 'login/not_active.html')
+                    message = 'El Usuario no esta Activo'
+                    messages.add_message(request, messages.ERROR, message)
             else:
-                return render(request, 'login/not_user.html')
+                message = 'El nombre de usuario o contraseña no coinciden'
+                messages.add_message(request, messages.ERROR, message)
     else:
         form = AuthenticationForm()
 
     return render(request, 'login/imput_system.html', {
         'form': form
     })
-
-
-@login_required(login_url='/log_in')
-def private(request):
-    usuario = request.user
-    profile = Profile.objects.get(user=usuario)
-    return render_to_response('login/private.html', {'usuario': usuario, 'profile': profile},
-                              context_instance=RequestContext(request))
 
 
 @login_required(login_url='/log_in')

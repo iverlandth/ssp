@@ -13,5 +13,4 @@ urlpatterns = [
 
     url(r'^log_out/$', views.log_out, name='log_out'),
     url(r'^log_in/$', views.log_in, name='log_in'),
-    url(r'^private/$', views.private, name='private'),
 ]
