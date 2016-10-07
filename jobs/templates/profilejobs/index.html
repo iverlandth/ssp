@@ -41,9 +41,19 @@
                                     <td>{{ profile.profile }}</td>
                                     <td>{{ profile.job }}</td>
                                     <td class="text-center">
-                                        <a href="{% url 'profilejobs-show' profile.id %}">Ver mas Detalles</a> |
-                                        <a href="{% url 'profilejobs-edit' profile.id %}">Modificar</a> |
-                                        <a href="{% url 'profilejobs-delete' profile.id %}">Eliminar</a>
+                                        <a href="{% url 'profilejobs-show' profile.id %}" data-tooltip="tooltip"
+                                           title="Más Detalles"><i
+                                                class="fa fa-bars text-success"></i></a>
+                                        <a href="{% url 'profilejobs-edit' profile.id %}" data-tooltip="tooltip"
+                                           title="Modificar"><i
+                                                class="fa fa-pencil text-success"></i></a>
+
+                                        <a href="#" data-href="{% url 'profilejobs-delete' profile.id %}"
+                                           data-toggle="modal" data-target="#confirm-delete" data-tooltip="tooltip"
+                                           title="Eliminar">
+                                            <i class="fa fa-times text-danger"></i>
+                                        </a>
+
                                     </td>
                                 </tr>
                             {% endfor %}

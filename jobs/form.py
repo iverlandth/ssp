@@ -25,13 +25,17 @@ class JobForm(BaseForm):
 
 
 class ProfileJobForm(BaseForm):
-    query = Profile.objects.all() #filter(rol='TEC')
-    profile = forms.ModelChoiceField(query, required=True, label='Perfil')
-
-
     class Meta:
         model = ProfileJob
         exclude = ['assign_at']
+
+    def __init__(self, *args, **kwargs):
+        super(ProfileJobForm, self).__init__(*args, **kwargs)
+        # access object through self.instance...
+        profiles = Profile.objects.filter(rol='TEC')
+        self.fields['profile'] = forms.ModelChoiceField(queryset=profiles,
+                                                        widget=forms.Select(attrs={'class': 'form-control'}),
+                                                        label='Perfil')
 
     def clean(self):
         cleaned_data = super(ProfileJobForm, self).clean()

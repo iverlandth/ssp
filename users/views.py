@@ -23,6 +23,7 @@ def profiles_index(request):
     profiles_all = Profile.objects.all()
     return render(request, 'profiles/index.html', {
         'profiles': profiles_all,
+        'profile_obj': Profile,
     })
 
 
@@ -72,7 +73,7 @@ def profiles_show(request, id):
 
     return render(request, 'profiles/show.html', {
         'profile': profile,
-        'profile_instance': Profile,
+        'profile_obj': Profile,
         'user_instance': User,
     })
 
@@ -85,7 +86,7 @@ def profiles_user_show(request, u_id):
 
     return render(request, 'profiles/show.html', {
         'profile': profile,
-        'profile_instance': Profile,
+        'profile_obj': Profile,
         'user_instance': User,
     })
 

@@ -43,8 +43,8 @@ class Job(models.Model):
         return "%s %s" % (self.name_client, self.jobtype)
 
     class Meta:
-        verbose_name = 'Tarea'
-        verbose_name_plural = 'Tareas'
+        verbose_name = 'Trabajo'
+        verbose_name_plural = 'Trabajos'
 
         permissions = (
             ('report_job', 'Can Report Job'),
@@ -54,11 +54,10 @@ class Job(models.Model):
 
 
 class ProfileJob(models.Model):
-    job = models.ForeignKey(Job)
-    profile = models.ForeignKey(Profile)
+    job = models.ForeignKey(Job, verbose_name='Trabajo')
+    profile = models.ForeignKey(Profile, verbose_name='Perfil')
     state = models.CharField(max_length=10, choices=STATUS_TASK, verbose_name='Estado', default='NUEVO')
     assign_at = models.DateTimeField(default=datetime.now, verbose_name=u'Fecha de Asignación')
-
 
     def __unicode__(self):
         return "%s - %s" % (self.job, self.profile)

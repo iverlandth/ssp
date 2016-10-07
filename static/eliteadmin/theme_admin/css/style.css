@@ -6205,11 +6205,11 @@ a.mytooltip {
   width: 300px;
   left: 50%;
   bottom: 100%;
-  font-size: 20px;
   line-height: 1.4;
-  text-align: center;
-  font-weight: 400;
-  color: #ffffff;
+  text-align: left;
+  font-weight: 200;
+  font-family: 'Poppins', sans-serif;;
+  color: #000000;
   background: transparent;
   opacity: 0;
   margin: 0 0 20px -150px;
@@ -6229,7 +6229,7 @@ a.mytooltip {
   display: block;
 }
 .tooltip-text3 {
-  border-bottom: 10px solid #fb9678;
+  border-bottom: 10px solid #01ba87;
   overflow: hidden;
   -webkit-transform: scale3d(0, 1, 1);
   transform: scale3d(0, 1, 1);
@@ -6243,8 +6243,8 @@ a.mytooltip {
   transform: scale3d(1, 1, 1);
 }
 .tooltip-inner2 {
-  background: #2b2b2b;
-  padding: 40px;
+  background: #eeeeee;
+  padding: 10px;
   -webkit-transform: translate3d(0, 100%, 0);
   transform: translate3d(0, 100%, 0);
   webkit-transition: -webkit-transform 0.3s;
@@ -6267,7 +6267,7 @@ a.mytooltip {
   position: absolute;
   pointer-events: none;
   border-color: transparent;
-  border-top-color: #fb9678;
+  border-top-color: #01ba87;
   border-width: 10px;
   margin-left: -10px;
 }

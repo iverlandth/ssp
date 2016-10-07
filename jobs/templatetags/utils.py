@@ -1,11 +1,19 @@
 from django import template
 from datetime import datetime
+
+from users.models import ROLES_PROFILE, MARITAL_STATUS, GENDER
+
 register = template.Library()
 
 
 @register.simple_tag
 def get_verbose_field_name(instance, field_name):
     return instance._meta.get_field(field_name).verbose_name.title()
+
+
+@register.simple_tag
+def get_field_name(obj, field_name):
+    return obj._meta.get_field(field_name).verbose_name.title()
 
 
 @register.simple_tag
@@ -29,33 +37,31 @@ def get_state_profile(status):
         'STR': 'SECRETARIA',
     }[status]
 
-@register.simple_tag
-def get_state_gender(status):
-    return {
-        'M': 'MASCULINO',
-        'F': 'FEMENINO',
-    }[status]
 
 @register.simple_tag
-def get_marital(status):
-    return {
-        'SO': 'SOLTERO(A)',
-        'CA': 'CASADO(A)',
-        'VI': 'VIUDO(A)',
-        'DI': 'DIVORCIADO(A)',
-        'CO': 'CONCUBINO(A)',
-        'SE': 'SEPARADO(A)',
-        'FA': 'FALLECIDO(A)',
-    }[status]
+def get_gender_profile(gender):
+    for status in GENDER:
+        if status[0] == gender:
+            return status[1]
+    return None
+
 
 @register.simple_tag
-def get_condition(status):
-    return {
-        'NUE': 'NUEVO',
-        'ENM': 'EN MANTENIMIENTO',
-        'REP': 'REPARADO',
-        'NOU': 'NO USABLE',
-    }[status]
+def get_marital_profile(marital):
+    for status in MARITAL_STATUS:
+        if status[0] == marital:
+            return status[1]
+    return None
+
+
+@register.simple_tag
+def get_role_profile(role):
+    print "-%s-" % role
+    for rol in ROLES_PROFILE:
+        if rol[0] == role:
+            return rol[1]
+    return None
+
 
 @register.simple_tag
 def get_category(status):
@@ -66,14 +72,15 @@ def get_category(status):
         'NOU': 'NO USABLE',
     }[status]
 
+
 @register.filter()
 def to_int(value):
     return int(value)
 
+
 @register.filter
 def index(List, i):
     count = len(List)
-    if(int(i)>count-1):
+    if (int(i) > count - 1):
         return "No registrado"
     return List[int(i)]
-

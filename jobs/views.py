@@ -197,7 +197,7 @@ class HistoryViewSet(APIView):
     renderer_classes = (JSONRenderer,)
 
     def post(self, request, format=None):
-        #print request.data
+        # print request.data
         updates = []
         if request.data.has_key('updates') is None:
             message = {'message': 'No Existen Actualizaciones'}
@@ -218,7 +218,6 @@ class HistoryViewSet(APIView):
                 lng = history['h_lng'] if history.has_key('h_lng') else None
 
                 if Profile.objects.filter(imei_code=imei).exists() and Job.objects.filter(pk=job_id).exists():
-
                     profile = Profile.objects.get(imei_code=imei)
 
                     job = Job.objects.get(pk=job_id)
@@ -256,7 +255,7 @@ class HistoryViewSet(APIView):
 def jobs_index(request):
     jobs_all = Job.objects.all()
     return render(request, 'jobs/index.html', {
-        'job_instance': Job,
+        'job_obj': Job,
         'jobs': jobs_all,
     })
 

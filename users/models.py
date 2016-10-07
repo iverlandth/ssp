@@ -10,8 +10,7 @@ MARITAL_STATUS = (('SO', 'SOLTERO(A)'),
                   ('VI', 'VIUDO(A)'),
                   ('DI', 'DIVORCIADO(A)'),
                   ('CO', 'CONCUBINO(A)'),
-                  ('SE', 'SEPARADO(A)'),
-                  ('FA', 'FALLECIDO(A)'),)
+                  ('SE', 'SEPARADO(A)'),)
 
 ROLES_PROFILE = (('SUP', 'SUPERVISOR'),
                  ('TEC', 'TECNICO'),)
@@ -32,7 +31,7 @@ class Profile(models.Model):
     imei_code = models.CharField(max_length=25, blank=True, unique=True, verbose_name='Imei Celular')
 
     def __unicode__(self):
-        return "%s %s" % (self.first_name, self.last_name)
+        return "%s %s" % (self.first_name, self.middle_name)
 
     class Meta:
         verbose_name = 'Perfil'

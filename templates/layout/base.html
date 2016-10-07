@@ -195,7 +195,7 @@
     -->
     <div id="page-wrapper" style="padding-top: 15px">
         <div class="container-fluid">
-        {% include 'layout/_messages.html' %}
+            {% include 'layout/_messages.html' %}
             {% block layout %}
             {% endblock %}
         </div>
@@ -207,6 +207,10 @@
         $(document).ready(function () {
             $('input').addClass('form-control');
             $('input:checkbox, input:radio').removeClass('form-control');
+            $('[data-tooltip="tooltip"]').tooltip();
+            $('#confirm-delete').on('show.bs.modal', function (e) {
+                $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            });
         })
     </script>
 {% endblock %}
