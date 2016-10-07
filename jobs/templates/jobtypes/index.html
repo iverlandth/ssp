@@ -41,9 +41,19 @@
                                         {{ jt.name }}
                                     </td>
                                     <td class="text-center">
-                                        <a href="{% url 'jobtypes-show' jt.id %}">Mas Detalles</a> |
-                                        <a href="{% url 'jobtypes-edit' jt.id %}">Modificar</a> |
-                                        <a href="{% url 'jobtypes-delete' jt.id %}">Eliminar</a>
+
+                                         <a href="{% url 'jobtypes-show' jt.id %}" data-tooltip="tooltip"
+                                           title="Más Detalles"><i
+                                                class="fa fa-bars text-success"></i></a>
+                                        <a href="{% url 'jobtypes-edit' jt.id %}" data-tooltip="tooltip"
+                                           title="Modificar"><i
+                                                class="fa fa-pencil text-success"></i></a>
+                                        <a href="#" data-href="{% url 'jobtypes-delete' jt.id %}"
+                                           data-toggle="modal" data-target="#confirm-delete" data-tooltip="tooltip"
+                                           title="Eliminar">
+                                            <i class="fa fa-times text-danger"></i>
+                                        </a>
+
                                     </td>
                                 </tr>
                             {% endfor %}
